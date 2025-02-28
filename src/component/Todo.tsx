@@ -1,10 +1,23 @@
+import  TodoObject  from './TodoObject'
 
-function Todo({ todos, completeTodo, removeTodo }) {
+// interface TodoObject {
+//   id: number,
+//   text: string,
+//   isComplete: boolean,
+// }
+
+interface TodoProps {
+  todos: TodoObject[];
+  completeTodo: (id: number) => void;
+  removeTodo: (id: number) => void;
+}
+
+function Todo({todos, completeTodo, removeTodo}: TodoProps) {
 
   return (
     <div className='wrapper-todo'>
-      {todos.map((todo, index) => {
-        const todoClass = todo.isComplete ?
+      {todos.map((todo: TodoObject, index: number) => {
+        const todoClass: string = todo.isComplete ?
           'todo-row complete' :
           'todo-row';
 
