@@ -6,14 +6,18 @@ import  TodoObject  from './component/TodoObject'
 
 // interface TodoObject {
 //   id: number,
-//   text: string,
+// if (!todo.text || /^\s*$/.test(todo.text)) 옆 조건 때문에 ?로 표현할 수 있다.
+//   text?: string,
 //   isComplete: boolean,
 // }
 
 function Todos(){
+  // [todos, setTodos] 타입은 useState가 결정한다. 구조분해할당 첫번째 요소는 todos, 두번째느 setTodos 를 갖는다.
+  // state의 타입을 지정하는 방법법
   const [todos, setTodos] = useState<TodoObject[]>([]);
 
   const addTodo = (todo: TodoObject) : void => {
+    // undefined도 false한 값값
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
     }

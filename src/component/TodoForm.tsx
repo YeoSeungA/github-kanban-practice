@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, ChangeEvent, FormEvent } from 'react';
 import  TodoObject  from './TodoObject'
 
 // interface TodoObject {
@@ -7,24 +7,26 @@ import  TodoObject  from './TodoObject'
 //   isComplete: boolean,
 // }
 
-interface TodoProps{
+interface TodoFormProps{
 onSubmit: (todo: TodoObject) => void;
 }
 
-function TodoForm(props: TodoProps) {
-  const [input, setInput] = useState('');
-  const [number, setNumber] = useState(1);
+const TodoForm = (props: TodoFormProps) => {
+  const [input, setInput] = useState<string>('');
+  const [number, setNumber] = useState<number>(1);
+  // inputRef는 우리가 작성하고 있는 input된 element
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     inputRef.current?.focus();
   })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+// React.ChangeEvent<HTMLInputElement> 를 넣으면 react에 종속된다. js or html로 넣어주는게 맞다.
+// input 창에서 바뀔때
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(e.target.value);
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     setNumber(number + 1);

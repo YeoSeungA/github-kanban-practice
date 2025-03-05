@@ -11,13 +11,13 @@ interface TodoProps {
   completeTodo: (id: number) => void;
   removeTodo: (id: number) => void;
 }
-
-function Todo({todos, completeTodo, removeTodo}: TodoProps) {
+// todos, completeTodo, removeTodo 3가지를 묶어서 인터페이스로 만든다.
+const Todo = ({todos, completeTodo, removeTodo}: TodoProps)  => {
 
   return (
     <div className='wrapper-todo'>
-      {todos.map((todo: TodoObject, index: number) => {
-        const todoClass: string = todo.isComplete ?
+      {todos.map((todo, index) => {
+        const todoClass = todo.isComplete ?
           'todo-row complete' :
           'todo-row';
 
